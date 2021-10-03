@@ -19,6 +19,10 @@ class TriquiController extends GetxController {
     return _matriz[n ~/ 3][n % 3];
   }
 
+  void _setMatriz(int n) {
+    _matriz[n ~/ 3][n % 3] = _turno.value;
+  }
+
   String getTextMatriz(int n) {
     return _matriz[n ~/ 3][n % 3] == -1
         ? "O"
@@ -27,8 +31,73 @@ class TriquiController extends GetxController {
             : " ";
   }
 
-  bool checkWinner() {
-    return false;
+  bool updateTablero(int n) {
+    if (getMatriz(n) == 0 && _nturnos.value < 9) {
+      // Se realiza la jugada
+      _setMatriz(n);
+      _nturnos++;
+      if (_nturnos >= 5) {
+        checkWinner();
+      }
+      return true; // se pudo hacer la jugada
+    }
+    return false; //  NO se pudo hacer la jugada
+  }
+
+  void checkWinner() {
+    int cont = 0;
+
+    //Por filas
+    for (int i = 0; i < 3; i++) {
+      cont = 0;
+      for (int j = 0; j < 3; j++) {
+        cont += _matriz[i][j];
+      }
+      if (cont == 3) {
+        _fin.value = 1;
+      } else if (cont == -3) {
+        _fin.value = -1;
+      }
+    }
+
+    //Por columnas
+    for (int i = 0; i < 3; i++) {
+      cont = 0;
+      for (int j = 0; j < 3; j++) {
+        cont += _matriz[j][i];
+      }
+      if (cont == 3) {
+        _fin.value = 1;
+      } else if (cont == -3) {
+        _fin.value = -1;
+      }
+    }
+
+    // Diagonal principal
+    cont = 0;
+    for (int j = 0; j < 3; j++) {
+      cont += _matriz[j][j];
+    }
+    if (cont == 3) {
+      _fin.value = 1;
+    } else if (cont == -3) {
+      _fin.value = -1;
+    }
+
+    // Diagonal segundaria
+    cont = 0;
+    for (int j = 0; j < 3; j++) {
+      cont += _matriz[j][3 - j - 1];
+    }
+    if (cont == 3) {
+      _fin.value = 1;
+    } else if (cont == -3) {
+      _fin.value = -1;
+    }
+
+    if (_fin.value == -2 && _nturnos.value == 9) {
+      _fin.value = 0;
+    }
   }
 
   void reset() {

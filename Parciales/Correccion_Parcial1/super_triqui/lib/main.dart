@@ -5,5 +5,5 @@ import 'presentation/screens/myhome.dart';
 
 void main() {
   Get.put<TriquiController>(TriquiController());
-  runApp(const MyApp());
+  runApp(App());
 }
