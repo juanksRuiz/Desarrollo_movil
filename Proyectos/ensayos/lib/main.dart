@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ensayos/domain/controllers/nameController.dart';
 import 'package:get/get.dart';
-import 'package:ensayos/widgets/comment_box.dart';
+import 'package:ensayos/ui/pages/post.dart';
+import 'package:ensayos/ui/pages/comentariosPage.dart';
 //import "ui/my_app.dart";
 
 void main() {
@@ -12,17 +13,9 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final String autor = "Juan Camilo Ruiz";
-    final bool hasPhoto = false;
-    final String contenido = "Hola estoy probando un comentario";
-    final int nLikes = 0;
-    var nRespuestas = 0;
-
     return GetMaterialApp(
       title: "State Management with Obx",
-      home: Scaffold(
-          appBar: null,
-          body: CommentBox(autor, hasPhoto, contenido, nLikes, nRespuestas)),
+      home: Scaffold(appBar: null, body: Post()),
     );
   }
 }

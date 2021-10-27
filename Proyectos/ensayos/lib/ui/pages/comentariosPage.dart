@@ -1,7 +1,6 @@
 //import 'package:ensayos/domain/controllers/authentication_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:ensayos/widgets/comment_box.dart';
-import 'package:ensayos/clases/comentario.dart';
 //import 'package:get/get.dart';
 
 Color verde = Colors.green[400]!;
@@ -24,9 +23,24 @@ class _ComentariosPageState extends State<ComentariosPage> {
   ];
   List<int> likesPorComentario = [0, 0];
   List<int> nRespPorComentario = [0, 0];
-
+  List<String> codigos = ["C1", "C2"];
+  List<String> fechas = ["17 mars 2021", "20 mars 2021"];
+  List<String> horas = ["14:05", "11:30"];
   @override
   Widget build(BuildContext context) {
+    // Es necesario lista de Widgets
+    List<Widget> listaComentarios = [];
+    for (var i = 0; i < nombres.length; i++) {
+      listaComentarios.add(CommentBox(
+          nombres[i],
+          havePhoto[i],
+          contenidos[i],
+          likesPorComentario[i],
+          nRespPorComentario[i],
+          codigos[i],
+          fechas[i],
+          horas[i]));
+    }
     return Scaffold(
         appBar: AppBar(backgroundColor: verde, title: Text("Comentarios:")),
         body: ListView.separated(
@@ -35,10 +49,15 @@ class _ComentariosPageState extends State<ComentariosPage> {
               const Divider(),
           itemCount: nombres.length,
           itemBuilder: (BuildContext context, int index) {
-            return Container(
-              height: 50,
-              color: Colors.amber,
-            );
+            return CommentBox(
+                nombres[index],
+                havePhoto[index],
+                contenidos[index],
+                likesPorComentario[index],
+                nRespPorComentario[index],
+                codigos[index],
+                fechas[index],
+                horas[index]);
           },
         ));
   }
