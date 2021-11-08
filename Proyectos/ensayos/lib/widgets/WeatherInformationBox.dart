@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
-//import 'package:get/get.dart';
+import 'package:get/get.dart';
 
 class WeatherInformationBox extends StatelessWidget {
   // atributos
   final String name;
   final value;
+  String _showValue(String nombre) {
+    if (nombre == "Humedad") {
+      return "${this.value} %";
+    } else if (nombre == "Temperatura") {
+      return "${this.value} °C"; // transformar de °K a °C
+    } else if (nombre == "Viento") {
+      // Para viento
+      return "${this.value} km/h";
+    } else {
+      // Para Sensación
+      return "${this.value} °C";
+    }
+  }
 
   // Constructor
   @override
@@ -16,8 +29,8 @@ class WeatherInformationBox extends StatelessWidget {
         elevation: 20,
         child: Container(
           color: Colors.indigo[900],
-          height: 100,
-          width: 100,
+          height: 150,
+          width: 150,
           padding: const EdgeInsets.all(5),
           alignment: Alignment.center,
           child: Column(
@@ -28,10 +41,10 @@ class WeatherInformationBox extends StatelessWidget {
                 name,
                 style: TextStyle(color: Colors.white),
               ),
-              Text(
-                "$value",
-                style: TextStyle(fontSize: 30, color: Colors.white),
-              )
+              Obx(() => Text(
+                    _showValue(this.name),
+                    style: TextStyle(fontSize: 15, color: Colors.white),
+                  ))
             ],
           ),
         ));
