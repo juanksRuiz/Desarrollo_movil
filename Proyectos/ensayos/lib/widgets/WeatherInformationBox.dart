@@ -41,10 +41,10 @@ class WeatherInformationBox extends StatelessWidget {
                 name,
                 style: TextStyle(color: Colors.white),
               ),
-              Obx(() => Text(
-                    _showValue(this.name),
-                    style: TextStyle(fontSize: 15, color: Colors.white),
-                  ))
+              Text(
+                _showValue(this.name),
+                style: TextStyle(fontSize: 15, color: Colors.white),
+              )
             ],
           ),
         ));
